@@ -1,15 +1,15 @@
-package com.icoding.locator.amap;
+package com.icoding.locator.baidu;
 
 import com.icoding.locator.ILocation;
 import com.icoding.locator.LocatorManager;
 import com.icoding.locator.LocatorService;
 
-public class AMapLocatorService extends LocatorService implements AMapManagerCallback{
+public class BaiduLocatorService extends LocatorService implements BaiduManagerCallback{
 	
 	@Override
 	@SuppressWarnings("rawtypes")
 	protected LocatorManager initializeManager() {
-		return new AMapLocatorManager(getApplicationContext());
+		return new BaiduLocatorManager(getApplicationContext());
 	}
 	
 	@Override

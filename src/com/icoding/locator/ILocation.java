@@ -42,6 +42,9 @@ public class ILocation implements Serializable{
 	//返回定位信息中的区域编码，只有在网络定位时才返回值(仅支持中国大陆、香港、澳门)。
 	private String adCode;
 	private int errorCode;
+	
+	private String locator;
+	
 	public String getTime() {
 		return time;
 	}
@@ -155,5 +158,11 @@ public class ILocation implements Serializable{
 	}
 	public void setAdCode(String adCode) {
 		this.adCode = adCode;
+	}
+	public String getLocator() {
+		return locator;
+	}
+	public void setLocator(String locator) {
+		this.locator = locator;
 	}
 }

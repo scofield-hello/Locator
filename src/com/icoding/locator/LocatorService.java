@@ -25,6 +25,7 @@ public abstract class LocatorService extends Service implements LocatorManagerCa
 		super.onCreate();
 		mLocatorManager = initializeManager();
 		mLocatorManager.setCallback(this);
+		mLocatorManager.configuration();
 		Log.d(DEBUG, "定位服务已创建");
 	}
 	

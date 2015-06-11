@@ -114,6 +114,7 @@ public class AMapLocatorManager implements LocatorManager<AMapManagerCallback>,A
 			if(location.getAMapException().getErrorCode() == 0){
 				if(mCallback != null){
 					ILocation loc = new ILocation();
+					loc.setLocator("AMAP");
 					loc.setTime(DateUtils.formateTime(location.getTime(), "yyyy-MM-dd HH:mm:ss"));
 					loc.setAddress(location.getAddress());
 					loc.setLatitude(location.getLatitude());
@@ -139,5 +140,10 @@ public class AMapLocatorManager implements LocatorManager<AMapManagerCallback>,A
 				mCallback.onLocationError(location.getAMapException().getErrorCode());
 			}
 		}
+	}
+
+	@Override
+	public void configuration() {
+		
 	}
 }
