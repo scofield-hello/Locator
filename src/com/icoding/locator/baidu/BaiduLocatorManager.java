@@ -3,6 +3,7 @@ package com.icoding.locator.baidu;
 import android.content.Context;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
+
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -20,7 +21,7 @@ public class BaiduLocatorManager implements LocatorManager<BaiduManagerCallback>
 	private BaiduManagerCallback mCallback;
 	
 	private LocationClient mLocationClient;
-	
+	private LocationClientOption mLocationOption;
 	public BaiduLocatorManager(Context context){
 		mContext = context;
 		mLocationClient = new LocationClient(mContext);
@@ -30,6 +31,8 @@ public class BaiduLocatorManager implements LocatorManager<BaiduManagerCallback>
 	@Override
 	public void startLocation(boolean gpsEnable) {
 		if(mLocationClient != null && mLocationClient.isStarted()){
+			mLocationOption.setOpenGps(gpsEnable);
+			mLocationClient.setLocOption(mLocationOption);
 			mLocationClient.requestLocation();
 		}
 		if(mCallback != null){
@@ -80,17 +83,17 @@ public class BaiduLocatorManager implements LocatorManager<BaiduManagerCallback>
 
 	@Override
 	public void configuration() {
-		LocationClientOption option = new LocationClientOption();
-		option.setLocationMode(LocationMode.Hight_Accuracy);//设置定位模式
-		option.setAddrType("all");
-		option.setCoorType("bd09ll");//返回的定位结果是百度经纬度bd09ll,默认值gcj02
+		mLocationOption = new LocationClientOption();
+		mLocationOption.setLocationMode(LocationMode.Hight_Accuracy);//设置定位模式
+		mLocationOption.setAddrType("all");
+		mLocationOption.setCoorType("bd09ll");//返回的定位结果是百度经纬度bd09ll,默认值gcj02
 		//setScanSpan < 1000 则为app主动请求定位；setScanSpan>=1000,则为定时定位模式
-		option.setScanSpan(500);
-		option.setIsNeedAddress(true);//返回的定位结果包含地址信息
-		option.setNeedDeviceDirect(false);//返回的定位结果包含手机机头的方向
-		option.setOpenGps(true);
-		option.setProdName("Locator");
-		mLocationClient.setLocOption(option);
+		mLocationOption.setScanSpan(500);
+		mLocationOption.setIsNeedAddress(true);//返回的定位结果包含地址信息
+		mLocationOption.setNeedDeviceDirect(false);//返回的定位结果包含手机机头的方向
+		mLocationOption.setOpenGps(false);
+		mLocationOption.setProdName("Locator");
+		mLocationClient.setLocOption(mLocationOption);
 		mLocationClient.registerLocationListener(this);
 		if(!mLocationClient.isStarted()){
 			mLocationClient.start();
