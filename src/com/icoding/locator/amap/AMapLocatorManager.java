@@ -12,6 +12,7 @@ import com.amap.api.location.LocationManagerProxy;
 import com.amap.api.location.LocationProviderProxy;
 import com.icoding.locator.ILocation;
 import com.icoding.locator.LocatorManager;
+import com.icoding.utils.DateUtils;
 
 public class AMapLocatorManager implements LocatorManager<AMapManagerCallback>,AMapLocationListener{
 	
@@ -113,7 +114,7 @@ public class AMapLocatorManager implements LocatorManager<AMapManagerCallback>,A
 			if(location.getAMapException().getErrorCode() == 0){
 				if(mCallback != null){
 					ILocation loc = new ILocation();
-					loc.setTime("" + location.getTime());
+					loc.setTime(DateUtils.formateTime(location.getTime(), "yyyy-MM-dd HH:mm:ss"));
 					loc.setAddress(location.getAddress());
 					loc.setLatitude(location.getLatitude());
 					loc.setLongitude(location.getLongitude());
@@ -125,6 +126,13 @@ public class AMapLocatorManager implements LocatorManager<AMapManagerCallback>,A
 					loc.setAccuracy(location.getAccuracy());
 					loc.setCountry(location.getCountry());
 					loc.setErrorCode(location.getAMapException().getErrorCode());
+					loc.setProvince(location.getProvince());
+					loc.setAdCode(location.getAdCode());
+					loc.setCity(location.getCity());
+					loc.setCityCode(location.getCityCode());
+					loc.setDistrict(location.getDistrict());
+					loc.setStreet(location.getStreet());
+					loc.setRoad(location.getRoad());
 					mCallback.onLocationReceived(loc);
 				}
 			}else{
