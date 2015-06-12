@@ -81,7 +81,15 @@ Intent intent = new Intent(this,BaiduLocatorService.class);
 //设置是否使用GPS定位
 intent.putExtra(LocatorService.EXTRA_ENABLE_GPS, true);
 startService(intent);
-
+/** 定时定位的写法
+Intent intent = new Intent(this,BaiduLocatorService.class);
+intent.putExtra(LocatorService.EXTRA_ENABLE_GPS, true);
+PendingIntent pending = PendingIntent.getService(getApplicationContext(), 0, 
+	intent, PendingIntent.FLAG_UPDATE_CURRENT);
+AlarmManager alarm = (AlarmManager) getSystemService(ALARM_SERVICE);
+long triggerAtMillis = System.currentTimeMillis();
+alarm.setRepeating(AlarmManager.RTC_WAKEUP, triggerAtMillis, 30 * 1000, pending);//30秒定位一次
+**/
 //注册BroadcastReceiver
 
 IntentFilter filter = new IntentFilter();
