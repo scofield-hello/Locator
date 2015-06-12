@@ -79,6 +79,7 @@
   服务,并注册注册BroadcastReceiver以接收位置信息
   ```java
 Intent intent = new Intent(this,BaiduLocatorService.class);
+//设置是否使用GPS定位
 intent.putExtra(LocatorService.EXTRA_ENABLE_GPS, true);
 startService(intent);
 
@@ -119,7 +120,7 @@ private BroadcastReceiver receiver = new BroadcastReceiver() {
 			sb.append(location.getLongitude());
 			sb.append("\naddress: ");
 			sb.append(location.getAddress());
-			sb.append("\nprovader:");
+			sb.append("\nprovader:");//gps ,lbs
 			sb.append(location.getProvider());
 			sb.append("\nLocator:");
 			sb.append(location.getLocator());
