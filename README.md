@@ -52,14 +52,13 @@
           android:name="com.baidu.location.f" 
           android:enabled="true" 
           android:process=":remote">
-          
-	    </service>
-	
+	</service>
+  	<!--高德定位服务-->
       <service 
   	    android:enabled="true"
   	    android:name="com.icoding.locator.amap.AMapLocatorService">
   	  </service>
-  	
+  	<!--百度定位服务-->
       <service 
   	    android:enabled="true"
   	    android:name="com.icoding.locator.baidu.BaiduLocatorService">
